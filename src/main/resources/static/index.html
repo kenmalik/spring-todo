@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Todo List</title>
+  <script src="https://unpkg.com/htmx.org@2.0.1" integrity="sha384-QWGpdj554B4ETpJJC9z+ZHJcA/i59TyjxEPXiiUgN2WmTyV5OEZWCD6gQhgkdpB/" crossorigin="anonymous"></script>
+</head>
+
+<body>
+  <h1>Todo List:</h1>
+  <form hx-get="/add" hx-target="#items">
+    <input id="item" name="item">
+    <button type="submit">Add item</button>
+  </form>
+  <ul id="items">
+  </ul>
+</body>
+
+</html>
