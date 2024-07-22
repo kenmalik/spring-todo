@@ -10,7 +10,7 @@
 
 <body>
   <h1>Todo List:</h1>
-  <form hx-get="/add" hx-target="#items">
+  <form hx-post="/add" hx-target="#items">
     <input id="item" name="item">
     <button type="submit">Add item</button>
   </form>
