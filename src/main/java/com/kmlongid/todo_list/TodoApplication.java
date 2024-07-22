@@ -1,7 +1,6 @@
 package com.kmlongid.todo_list;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -18,12 +17,12 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 @Controller
 public class TodoApplication {
 
-  private static int currentId = 1;
+  private static int currentId = 0;
 
   private record Item(int id, String content) {
   };
 
-  private static final ArrayList<Item> items = new ArrayList<Item>(Arrays.asList(new Item(0, "hi"), new Item(1, "hello")));
+  private static final ArrayList<Item> items = new ArrayList<Item>();
 
   public static void main(String[] args) {
     SpringApplication.run(TodoApplication.class, args);
@@ -47,10 +46,6 @@ public class TodoApplication {
   @DeleteMapping("/delete")
   @ResponseStatus(HttpStatus.OK)
   public void delete(@RequestParam(name = "id", required = true) int id) {
-    System.out.println(id);
-    for (Item item : items) {
-      System.out.println(item.id());
-    }
     items.removeIf(item -> (item.id() == id));
   }
 

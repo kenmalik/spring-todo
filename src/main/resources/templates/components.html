@@ -8,11 +8,15 @@
     <button type="submit">Add item</button>
   </form>
 
-  <li th:id="'item-' + ${item.id}" th:fragment="list-item (item)">
+  <li th:id="'item-' + ${item.id}" class="item" th:fragment="list-item (item)">
     <span th:text="${item.content}"></span>
-    <div th:hx-delete="'/delete?id=' + ${item.id}" th:hx-target="'#item-' + ${item.id}" hx-swap="outerHTML"
-      class="icon-button">
-      <img src="/icons/trash.svg">
+    <div th:hx-delete="'/delete?id=' + ${item.id}" th:hx-target="'#item-' + ${item.id}" hx-swap="outerHTML swap:500ms"
+      th:hx-indicator="'#ci-' + ${item.id}" class="icon-button">
+      <img src="/icons/trash.svg" alt="Delete icon">
+    </div>
+
+    <div th:id="'ci-' + ${item.id}" class="htmx-indicator">
+      <img src="/icons/oval.svg" alt="Loading spinner">
     </div>
   </li>
 
