@@ -8,7 +8,7 @@
     <button type="submit">Add item</button>
   </form>
 
-  <li th:each="item: ${items}" th:id="'item-' + ${item.id}" th:fragment="list-item">
+  <li th:id="'item-' + ${item.id}" th:fragment="list-item (item)">
     <span th:text="${item.content}"></span>
     <div th:hx-delete="'/delete?id=' + ${item.id}" th:hx-target="'#item-' + ${item.id}" hx-swap="outerHTML"
       class="icon-button">
@@ -16,14 +16,14 @@
     </div>
   </li>
 
-  <ul id="items" hx-swap-oob="true" th:fragment="oob-list-item">
-    <div th:replace="~{::list-item}"> </div>
+  <ul id="items" hx-swap-oob="beforeend" th:fragment="oob-list-item (item)">
+    <div th:replace="~{::list-item (${item})}"> </div>
   </ul>
 
   <th:block th:fragment="return-value">
     <div th:replace="~{::form}"></div>
 
-    <div th:replace="~{::oob-list-item}"></div>
+    <div th:replace="~{::oob-list-item (${item})}"></div>
   </th:block>
 </body>
 

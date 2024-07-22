@@ -1,6 +1,7 @@
 package com.kmlongid.todo_list;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -17,12 +18,12 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 @Controller
 public class TodoApplication {
 
-  private static int currentId = 0;
+  private static int currentId = 1;
 
   private record Item(int id, String content) {
   };
 
-  private static final ArrayList<Item> items = new ArrayList<Item>();
+  private static final ArrayList<Item> items = new ArrayList<Item>(Arrays.asList(new Item(0, "hi"), new Item(1, "hello")));
 
   public static void main(String[] args) {
     SpringApplication.run(TodoApplication.class, args);
@@ -30,14 +31,16 @@ public class TodoApplication {
 
   @GetMapping("/")
   public String home(Model model) {
+    model.addAttribute("items", items);
     return "home";
   }
 
   @PostMapping("/add")
   public String add(@RequestParam(name = "item", required = true) String item,
       Model model) {
-    items.add(new Item(++currentId, item));
-    model.addAttribute("items", items);
+    Item newItem = new Item(++currentId, item);
+    items.add(newItem);
+    model.addAttribute("item", newItem);
     return "components :: return-value";
   }
 
