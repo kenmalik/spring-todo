@@ -1,1 +1,7 @@
-<li th:each="item: ${items}" th:text="${item}"></li>
+<li th:each="item: ${items}" th:id="'item-' + ${item.id}">
+  <span th:text="${item.content}"></span>
+  <div th:hx-delete="'/delete?id=' + ${item.id}" th:hx-target="'#item-' + ${item.id}" hx-swap="outerHTML"
+    class="icon-button">
+    <img src="/icons/trash.svg">
+  </div>
+</li>
