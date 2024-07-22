@@ -8,6 +8,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseStatus;
@@ -27,12 +28,17 @@ public class TodoApplication {
     SpringApplication.run(TodoApplication.class, args);
   }
 
+  @GetMapping("/")
+  public String home(Model model) {
+    return "home";
+  }
+
   @PostMapping("/add")
-  public String test(@RequestParam(name = "item", required = true) String item,
+  public String add(@RequestParam(name = "item", required = true) String item,
       Model model) {
     items.add(new Item(++currentId, item));
     model.addAttribute("items", items);
-    return "list";
+    return "components :: return-value";
   }
 
   @DeleteMapping("/delete")

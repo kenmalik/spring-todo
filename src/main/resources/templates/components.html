@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+
+<html xmlns:th="http://www.thymeleaf.org">
+
+<body>
+  <form hx-post="/add" hx-swap="outerHTML" th:fragment="form">
+    <input id="item" name="item">
+    <button type="submit">Add item</button>
+  </form>
+
+  <li th:each="item: ${items}" th:id="'item-' + ${item.id}" th:fragment="list-item">
+    <span th:text="${item.content}"></span>
+    <div th:hx-delete="'/delete?id=' + ${item.id}" th:hx-target="'#item-' + ${item.id}" hx-swap="outerHTML"
+      class="icon-button">
+      <img src="/icons/trash.svg">
+    </div>
+  </li>
+
+  <ul id="items" hx-swap-oob="true" th:fragment="oob-list-item">
+    <div th:replace="~{::list-item}"> </div>
+  </ul>
+
+  <th:block th:fragment="return-value">
+    <div th:replace="~{::form}"></div>
+
+    <div th:replace="~{::oob-list-item}"></div>
+  </th:block>
+</body>
+
+</html>
