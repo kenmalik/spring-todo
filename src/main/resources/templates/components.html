@@ -9,14 +9,17 @@
   </form>
 
   <li th:id="'item-' + ${item.id}" class="item" th:fragment="list-item (item)">
-    <span th:text="${item.content}"></span>
-    <div th:hx-delete="'/delete?id=' + ${item.id}" th:hx-target="'#item-' + ${item.id}" hx-swap="outerHTML swap:500ms"
-      th:hx-indicator="'#ci-' + ${item.id}" class="icon-button">
-      <img src="/icons/trash.svg" alt="Delete icon">
-    </div>
+    <p th:text="${item.content}"></p>
 
-    <div th:id="'ci-' + ${item.id}" class="htmx-indicator">
-      <img src="/icons/oval.svg" alt="Loading spinner">
+    <div class="list-buttons">
+      <div th:hx-delete="'/delete?id=' + ${item.id}" th:hx-target="'#item-' + ${item.id}" hx-swap="outerHTML swap:500ms"
+        th:hx-indicator="'#ci-' + ${item.id}" class="icon clickable">
+        <img src="/icons/trash.svg" alt="Delete icon">
+      </div>
+
+      <div th:id="'ci-' + ${item.id}" class="htmx-indicator icon">
+        <img src="/icons/puff.svg" alt="Loading spinner">
+      </div>
     </div>
   </li>
 

@@ -13,7 +13,9 @@
 
 <body>
   <h1>Todo List:</h1>
-  <div th:replace="~{components :: form}"></div>
+  <div class="inputs">
+    <div th:replace="~{components :: form}"></div>
+  </div>
   <ul id="items">
     <th:block th:each="item: ${items}">
       <div th:replace="~{components :: list-item (${item})}"></div>

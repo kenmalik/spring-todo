@@ -46,6 +46,12 @@ public class TodoApplication {
   @DeleteMapping("/delete")
   @ResponseStatus(HttpStatus.OK)
   public void delete(@RequestParam(name = "id", required = true) int id) {
+    try {
+      Thread.sleep(1000);
+    } catch (Exception e) {
+
+    }
+
     items.removeIf(item -> (item.id() == id));
   }
 
